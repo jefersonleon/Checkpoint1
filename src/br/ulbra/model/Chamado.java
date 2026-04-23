@@ -1,5 +1,7 @@
-
 package br.ulbra.model;
+
+import java.sql.Timestamp;
+
 /*
 chamado_tecnico (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -11,12 +13,16 @@ diagnostico_tecnico TEXT,
 prioridade VARCHAR(20) DEFAULT &#39;MÉDIA&#39;,
 status VARCHAR(20) DEFAULT &#39;PENDENTE&#39;,
 data_abertura TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-*/
+ */
 public class Chamado {
+
     private int id;
-    private String solicitante;
-    private String sala;
-    private String equipamento_tag;
+
+    // Substituindo as Strings pelos IDs e Objetos [Relacionamento]
+    private int idUsuario;
+    private Usuario usuario; // Opcional: útil para exibir o nome do solicitante
+    private int idEquipamento;
+    private Equipamento equipamento; // Opcional: útil para exibir a sala e a tag
     private String problemaRelatado;
     private String diagnosticoTecnico;
     private String prioridade;
@@ -26,11 +32,12 @@ public class Chamado {
     public Chamado() {
     }
 
-    public Chamado(int id, String solicitante, String sala, String equipamento_tag, String problemaRelatado, String diagnosticoTecnico, String prioridade, String status, String dataAbertura) {
+    // Construtor atualizado para a nova estrutura do banco
+    public Chamado(int id, int idUsuario, int idEquipamento, String problemaRelatado,
+            String diagnosticoTecnico, String prioridade, String status, String dataAbertura) {
         this.id = id;
-        this.solicitante = solicitante;
-        this.sala = sala;
-        this.equipamento_tag = equipamento_tag;
+        this.idUsuario = idUsuario;
+        this.idEquipamento = idEquipamento;
         this.problemaRelatado = problemaRelatado;
         this.diagnosticoTecnico = diagnosticoTecnico;
         this.prioridade = prioridade;
@@ -38,6 +45,7 @@ public class Chamado {
         this.dataAbertura = dataAbertura;
     }
 
+    // Getters e Setters Atualizados
     public int getId() {
         return id;
     }
@@ -46,28 +54,36 @@ public class Chamado {
         this.id = id;
     }
 
-    public String getSolicitante() {
-        return solicitante;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setSolicitante(String solicitante) {
-        this.solicitante = solicitante;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getSala() {
-        return sala;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setSala(String sala) {
-        this.sala = sala;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public String getEquipamento_tag() {
-        return equipamento_tag;
+    public int getIdEquipamento() {
+        return idEquipamento;
     }
 
-    public void setEquipamento_tag(String equipamento_tag) {
-        this.equipamento_tag = equipamento_tag;
+    public void setIdEquipamento(int idEquipamento) {
+        this.idEquipamento = idEquipamento;
+    }
+
+    public Equipamento getEquipamento() {
+        return equipamento;
+    }
+
+    public void setEquipamento(Equipamento equipamento) {
+        this.equipamento = equipamento;
     }
 
     public String getProblemaRelatado() {
@@ -109,7 +125,4 @@ public class Chamado {
     public void setDataAbertura(String dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
-    
-    
-    
 }

@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,7 +35,7 @@ public class ConnectionFactory {
             password = props.getProperty("db.password");
 
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao carregar propriedades");
+            JOptionPane.showMessageDialog(null, "Erro na conexão"+ e.getMessage());
         }
     }
 
@@ -42,8 +43,9 @@ public class ConnectionFactory {
         try {
             return DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
-            throw new RuntimeException("Erro na conexão", e);
+            JOptionPane.showMessageDialog(null, "Erro na conexão"+ e.getMessage());
         }
+        return null;
     }
 
 

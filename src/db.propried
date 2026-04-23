@@ -1,4 +1,0 @@
-db.url=jdbc:mysql://localhost:3306/crud_java
-db.user=root
-db.password=Ulbra@1234
-
